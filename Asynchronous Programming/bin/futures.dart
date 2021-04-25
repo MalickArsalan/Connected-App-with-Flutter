@@ -1,16 +1,13 @@
-import 'dart:io';
-
 void pretendFileIo() {
   print('File IO: Started');
   print('File IO: File content => Hello Futures');
   print('File IO: Done');
 }
 
-void pretendHTTPRequest() {
+Future<void> pretendHTTPRequest() {
   print('HTTP Request: Started');
-  sleep(Duration(seconds: 8));
-  print('HTTP Request: Response => A SON placeholder');
-  print('HTTP Request: Done');
+  return Future.delayed(
+      Duration(seconds: 8), () => print('A JSON placeholder'));
 }
 
 void pretendDatabaseQuery(String searchTerm) {
