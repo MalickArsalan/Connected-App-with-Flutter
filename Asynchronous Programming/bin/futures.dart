@@ -9,18 +9,26 @@ Future<String> pretendHTTPRequest() {
   return Future.delayed(Duration(seconds: 8), () => ('A JSON placeholder'));
 }
 
-void pretendDatabaseQuery(String searchTerm) {
+Future<String> pretendDatabaseQuery(String searchTerm) {
   print('Databse query for $searchTerm: Started');
-  print('Databse query: Resultset => ID: 1, FirstName: Malick, LastName: Noor');
-  print('Databse query: Done');
+  //print('Databse query: Resultset => ID: 1, FirstName: Malick, LastName: Noor');
+  //print('Databse query: Done');
+  return Future.delayed(
+      Duration(seconds: 2),
+      () =>
+          'Databse query: Resultset => ID: 1, FirstName: Malick, LastName: Noor');
 }
 
 void main(List<String> args) {
   pretendFileIo();
   var response = pretendHTTPRequest();
-  response.then((value) => {
-        print('HTTP Request: Response => $value'),
+  response.then((s) => {
+        print('HTTP Request: Response => $s'),
         print('HTTP Request: Done'),
+        //pretendDatabaseQuery('Flutter')
+        pretendDatabaseQuery('Flutter').then((rs) => {
+              print('Database query: Resultset => $rs'),
+              print('Database query: Done'),
+            })
       });
-  pretendDatabaseQuery('Flutter');
 }
