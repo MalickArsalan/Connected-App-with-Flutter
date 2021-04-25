@@ -1,11 +1,14 @@
+import 'dart:io';
+
 void pretendFileIo() {
   print('File IO: Started');
   print('File IO: File content => Hello Futures');
-  print('');
+  print('File IO: Done');
 }
 
 void pretendHTTPRequest() {
   print('HTTP Request: Started');
+  sleep(Duration(seconds: 8));
   print('HTTP Request: Response => A SON placeholder');
   print('HTTP Request: Done');
 }
