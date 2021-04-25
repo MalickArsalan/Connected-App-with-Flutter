@@ -4,7 +4,7 @@ void pretendFileIo() {
   print('File IO: Done');
 }
 
-Future<String> pretendHTTPRequest({bool withError = false}) {
+Future<String> pretendHTTPRequest({bool withError = false}) async {
   print('HTTP Request: Started');
   if (withError) {
     return Future.error('Pretend HTTP Timeout');
@@ -13,7 +13,7 @@ Future<String> pretendHTTPRequest({bool withError = false}) {
   }
 }
 
-void pretendDatabaseQuery(String searchTerm) async {
+void pretendDatabaseQuery(String searchTerm) {
   print('Databse query for $searchTerm: Started');
   print('Databse query: Resultset => ID: 1, FirstName: Malick, LastName: Noor');
   print('Databse query: Done');
@@ -23,14 +23,14 @@ void pretendDatabaseQuery(String searchTerm) async {
   //         'Databse query: Resultset => ID: 1, FirstName: Malick, LastName: Noor');
 }
 
-Future<void> main(List<String> args) async {
+void main(List<String> args) async {
   pretendFileIo();
-  var response = pretendHTTPRequest(withError: true);
-  response.then((s) {
-    print('HTTP Request: Response => $s');
+  try {
+    var response = await pretendHTTPRequest(withError: false);
+    print('HTTP Request: Response => $response');
     print('HTTP Request: Done');
-    pretendDatabaseQuery(s);
-  }).catchError((e) {
+    pretendDatabaseQuery(response);
+  } catch (e) {
     print('An error occurred: $e');
-  });
+  }
 }
