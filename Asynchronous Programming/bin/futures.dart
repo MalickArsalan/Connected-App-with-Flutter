@@ -4,10 +4,9 @@ void pretendFileIo() {
   print('File IO: Done');
 }
 
-Future<void> pretendHTTPRequest() {
+Future<String> pretendHTTPRequest() {
   print('HTTP Request: Started');
-  return Future.delayed(
-      Duration(seconds: 8), () => print('A JSON placeholder'));
+  return Future.delayed(Duration(seconds: 8), () => ('A JSON placeholder'));
 }
 
 void pretendDatabaseQuery(String searchTerm) {
@@ -18,6 +17,10 @@ void pretendDatabaseQuery(String searchTerm) {
 
 void main(List<String> args) {
   pretendFileIo();
-  pretendHTTPRequest();
+  var response = pretendHTTPRequest();
+  response.then((value) => {
+        print('HTTP Request: Response => $value'),
+        print('HTTP Request: Done'),
+      });
   pretendDatabaseQuery('Flutter');
 }
